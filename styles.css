@@ -1,0 +1,115 @@
+/* Direction C: Circuit. Engineering notebook: dot grid, mono labels, a typed intro. */
+:root {
+  --paper: #f3f2ee;
+  --ink: #16181d;
+  --muted: #646a73;
+  --accent: #ff4d00;
+  --rule: #d9d7d0;
+  --grid: rgba(22, 24, 29, .2);
+  --display: "Inter Tight", system-ui, sans-serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #111317;
+    --ink: #e9eaec;
+    --muted: #8d939c;
+    --accent: #ff7a3d;
+    --rule: #262a31;
+    --grid: rgba(255, 255, 255, .09);
+  }
+}
+body { background: radial-gradient(var(--grid) 1px, transparent 1.2px) 0 0 / 22px 22px, var(--paper); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3, p { margin: 0; }
+
+.skip-link { position: absolute; z-index: 10; top: 8px; left: 8px; padding: 6px 10px; background: var(--ink); color: var(--paper); transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+
+/* Two columns on wide screens: the intro stays put while the details scroll. */
+.page { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(48px, 7vw, 120px); max-width: 1680px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 80px); }
+.intro { position: sticky; top: 0; display: flex; height: 100vh; max-height: 1000px; flex-direction: column; justify-content: space-between; padding: 72px 0 56px; }
+.lede { max-width: 380px; color: var(--muted); }
+
+.section-nav { display: grid; justify-items: start; gap: 6px; margin-top: 40px; font-size: 14px; }
+.section-nav a { display: flex; align-items: center; gap: 12px; color: var(--muted); transition: color 150ms ease; }
+.section-nav a::before { width: 24px; height: 1px; background: currentColor; content: ""; transition: width 200ms ease; }
+.section-nav a:hover, .section-nav a.active { color: var(--ink); }
+.section-nav a:hover::before, .section-nav a.active::before { width: 48px; }
+
+.links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; font-size: 14px; font-weight: 500; }
+
+main { padding: 72px 0 56px; }
+section + section { margin-top: 44px; }
+.entry { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.when { padding-top: 3px; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+h3 { margin-bottom: 6px; font-size: 16px; font-weight: 600; }
+h3 a span { display: inline-block; font-weight: 400; transition: transform 150ms ease; }
+h3 a:hover span { transform: translate(3px, -3px); }
+.org { color: var(--muted); font-weight: 400; }
+.entry p:not(.when) { font-size: 15px; }
+.entry .tools { margin-top: 8px; color: var(--muted); font-size: 13px; }
+
+.footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 56px; color: var(--muted); font-size: 14px; }
+.footer a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 820px) {
+  .page { display: block; padding: 0 20px; }
+  .intro { position: static; height: auto; max-height: none; gap: 28px; padding: 48px 0 8px; }
+  .section-nav { display: none; }
+  main { padding: 32px 0 40px; }
+  section + section { margin-top: 40px; }
+  .entry { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+  .footer { flex-direction: column; margin-top: 40px; }
+}
+
+/* Direction styles */
+::selection { background: var(--accent); color: #fff; }
+
+.kicker { color: var(--accent); font: 500 13px/1.4 var(--mono); }
+.kicker::before { content: "> "; }
+.caret { display: inline-block; width: .6em; height: 1.1em; margin-left: 2px; background: var(--accent); vertical-align: -.2em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+h1 { margin: 14px 0 20px; font: 700 clamp(50px, 7.4vw, 112px)/.95 var(--display); letter-spacing: -.045em; }
+
+.section-nav, .links, .when, .entry .tools, .footer { font-family: var(--mono); }
+.section-nav { font-size: 13px; counter-reset: nav; }
+.section-nav a::after { counter-increment: nav; content: counter(nav, decimal-leading-zero); order: -1; color: var(--accent); font-size: 11px; }
+.links { gap: 8px 18px; font-size: 13px; font-weight: 500; }
+.links a::before { color: var(--accent); content: "["; }
+.links a::after { color: var(--accent); content: "]"; }
+.links a:hover { color: var(--accent); }
+
+main { counter-reset: sec; }
+h2 { display: flex; align-items: center; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--ink); font: 500 13px/1 var(--mono); letter-spacing: .04em; text-transform: lowercase; }
+h2::before { counter-increment: sec; content: counter(sec, decimal-leading-zero) " //"; color: var(--accent); }
+
+.entry { position: relative; }
+/* A signal trace runs along the entry's left edge on hover. */
+.entry::before { position: absolute; top: 20px; bottom: 20px; left: -18px; width: 2px; background: var(--accent); content: ""; transform: scaleY(0); transform-origin: top; transition: transform 250ms ease; }
+.entry:hover::before { transform: scaleY(1); }
+.when { font-size: 12px; }
+h3 { font: 600 clamp(18px, 1.6vw, 23px)/1.3 var(--display); letter-spacing: -.01em; }
+.lede { max-width: 480px; font-size: clamp(16px, 1.3vw, 19px); }
+.entry p:not(.when) { font-size: clamp(15px, 1.2vw, 17px); }
+h3 a span { color: var(--accent); }
+.entry p.tools { font-size: 12px; }
+.entry { grid-template-columns: 150px minmax(0, 1fr); gap: 28px; padding: 24px 0; }
+@media (max-width: 820px) {
+  .page { padding: 0 20px; }
+  .entry { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+}
+.entry .tools::before { color: var(--accent); content: "$ "; }
+.footer { font-size: 13px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

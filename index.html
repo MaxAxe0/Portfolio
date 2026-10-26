@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Max McManus is an Electrical and Computer Engineering student at Middlesex Community College with DevOps internship experience at CDK Global." />
+    <title>Max McManus — ECE Student</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <header class="intro">
+        <div>
+          <p class="kicker">Electrical &amp; Computer Engineering student</p>
+          <h1>Max McManus</h1>
+          <p class="lede">I study Electrical and Computer Engineering at Middlesex Community College. My work combines DevOps experience at CDK Global with independent projects in local AI and automation.</p>
+          <nav class="section-nav" aria-label="Sections">
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+          </nav>
+        </div>
+        <ul class="links" aria-label="Contact">
+          <li><a href="mailto:maxcarlinmcmanus@gmail.com">Email</a></li>
+          <li><a href="https://github.com/MaxAxe0" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/max-mcmanus-100855387" target="_blank" rel="noreferrer">LinkedIn</a></li>
+          <li><a href="Max_McManus_Resume.pdf" download="Max_McManus_Resume.pdf">Resume</a></li>
+        </ul>
+      </header>
+
+      <main id="main">
+        <section id="projects" aria-labelledby="projects-title">
+          <h2 id="projects-title">Projects</h2>
+          <article class="entry">
+            <p class="when">2026</p>
+            <div>
+              <h3><a href="https://github.com/MaxAxe0/Alfred" target="_blank" rel="noreferrer">Alfred <span aria-hidden="true">↗</span></a></h3>
+              <p>An open-source personal AI assistant built to run on your own hardware. The long-term vision is a modular assistant accessible from anywhere through text, desktop, voice, and live screen sharing, with extensions for everyday computer tasks. The current Python and Ollama prototype supports local chat, sandboxed text-file tools, and email integration.</p>
+              <p class="tools">Python · Ollama · Docker · Gmail API</p>
+            </div>
+          </article>
+        </section>
+
+        <section id="experience" aria-labelledby="experience-title">
+          <h2 id="experience-title">Experience</h2>
+          <article class="entry">
+            <p class="when">Jun – Aug 2026</p>
+            <div>
+              <h3>DevOps Engineer Intern <span class="org">· CDK Global · Austin, TX</span></h3>
+              <p>Developed and deployed a systems health-check program that remains in production. Collaborated with engineering teams on troubleshooting, deployment workflows, and automated end-to-end testing.</p>
+              <p class="tools">GitHub · Jira · Azure SQL · End-to-end testing</p>
+            </div>
+          </article>
+          <article class="entry">
+            <p class="when">Oct 2023 – Present</p>
+            <div>
+              <h3>Product Flow Shift Lead <span class="org">· Best Buy · Nashua, NH</span></h3>
+              <p>Lead closing operations as a keyholder, coordinating team workflows and store readiness. Manage inventory, customer orders, and shipment records in a high-volume retail environment.</p>
+            </div>
+          </article>
+        </section>
+
+        <section id="education" aria-labelledby="education-title">
+          <h2 id="education-title">Education</h2>
+          <article class="entry">
+            <p class="when">2025 – Present</p>
+            <div>
+              <h3>Middlesex Community College</h3>
+              <p>Electrical and Computer Engineering</p>
+            </div>
+          </article>
+        </section>
+
+        <footer class="footer">
+          <p>Get in touch at <a href="mailto:maxcarlinmcmanus@gmail.com">maxcarlinmcmanus@gmail.com</a></p>
+          <p>© <span id="year">2026</span> Max McManus</p>
+        </footer>
+      </main>
+    </div>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <script>
+      // Highlight the nav link for the section being read. A marker line moves
+      // down the screen as you scroll (15% at the top of the page, 85% at the
+      // bottom), and the last section heading above it wins. This still works
+      // on big screens where the page barely scrolls. A clicked link stays lit.
+      const navLinks = [...document.querySelectorAll(".section-nav a")];
+      const sections = [...document.querySelectorAll("main section")];
+      const setActive = (id) => navLinks.forEach((a) => a.classList.toggle("active", a.hash === "#" + id));
+      let clickedAt = 0;
+      const updateNav = () => {
+        if (Date.now() - clickedAt < 900) return;
+        const maxScroll = document.documentElement.scrollHeight - innerHeight;
+        const progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
+        const line = innerHeight * (0.15 + 0.7 * progress);
+        let current = sections[0];
+        sections.forEach((s) => { if (s.getBoundingClientRect().top <= line) current = s; });
+        setActive(current.id);
+      };
+      navLinks.forEach((a) => a.addEventListener("click", () => { clickedAt = Date.now(); setActive(a.hash.slice(1)); }));
+      addEventListener("scroll", updateNav, { passive: true });
+      addEventListener("resize", updateNav);
+      updateNav();
+    </script>
+    <script>
+      // Type the intro line out once, then leave a blinking cursor.
+      const kicker = document.querySelector(".kicker");
+      const text = kicker.textContent;
+      const caret = '<span class="caret" aria-hidden="true"></span>';
+      kicker.setAttribute("aria-label", text);
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        kicker.innerHTML = text + caret;
+      } else {
+        let i = 0;
+        const tick = () => {
+          kicker.innerHTML = text.slice(0, i).replace(/&/g, "&amp;") + caret;
+          if (i++ < text.length) setTimeout(tick, 38);
+        };
+        tick();
+      }
+    </script>
+  </body>
+</html>
