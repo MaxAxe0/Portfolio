@@ -8,12 +8,9 @@ My personal portfolio, featuring engineering projects, professional experience, 
 
 I study Electrical and Computer Engineering at Middlesex Community College. My experience includes a DevOps engineering internship at CDK Global, where I developed and deployed a production systems health-check program and contributed to automated end-to-end testing.
 
-My current independent project is [Alfred](https://github.com/MaxAxe0/Alfred), a personal AI assistant that runs on local hardware.
-
 ## Built with
 
-- HTML, CSS, and JavaScript
-- Responsive layouts, light and dark themes, and reduced-motion support
+- HTML and CSS
 - GitHub Pages hosting with a custom domain
 
 ## Preview locally
