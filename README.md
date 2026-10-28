@@ -29,7 +29,7 @@ cd Portfolio
 | `index.html` | Portfolio content and interactions |
 | `styles.css` | Layout, typography, and themes |
 | `favicon.svg` | Browser icon |
-| `Max_McManus_Resume.pdf` | Public resume |
+| `MaxMcManusResume.pdf` | Public resume |
 | `CNAME` | Custom domain configuration |
 
 ## Contact
