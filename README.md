@@ -6,7 +6,7 @@ My personal portfolio, featuring engineering projects, professional experience, 
 
 ## About
 
-I study Electrical and Computer Engineering at Middlesex Community College. My experience includes a DevOps engineering internship at CDK Global, where I developed and deployed a production systems health-check program and contributed to automated end-to-end testing.
+I study Electrical and Computer Engineering at Middlesex Community College. During my DevOps engineering internship at CDK Global, I developed TypeScript and Playwright health checks for customer-facing products and deployed them through a Harness CI/CD pipeline on Kubernetes, with automated notifications and failure alerts.
 
 ## Built with
 
